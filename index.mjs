@@ -5,7 +5,6 @@ const browser = await puppeteer.launch({
 });
 const page = await browser.newPage();
 
-await page.goto('https://baidu.com');
 
 await page.setRequestInterception(true);
 page.on('request', (request) => {
@@ -18,17 +17,19 @@ page.on('response', async (response) => {
   const status = response.status();
 
   if (status === 412 || status === 413) {
-    console.log(`拦截到 412 响应，URL: ${url}`);
 
     const responseBody = await response.text();
+
+    console.log('------------------');
+    console.log(responseBody);
+    console.log('------------------');
+
 
     // 发送修改后的响应
     await page.evaluate((body) => {
       console.log(body);
       document.body.innerHTML = body;
     }, responseBody);
-
-    console.log(`已将 412 替换为 200，URL: ${url}`);
   }
 });
 

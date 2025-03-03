@@ -11,6 +11,7 @@
   "description": "",
   "packageManager": "yarn@1.22.22",
   "dependencies": {
+    "jsdom": "^26.0.0",
     "puppeteer": "^24.3.0",
     "x-novel-parse": "^0.0.10"
   }
