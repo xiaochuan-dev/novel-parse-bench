@@ -1,29 +1,25 @@
 import puppeteer from 'puppeteer';
-// Or import puppeteer from 'puppeteer-core';
 
-// Launch the browser and open a new blank page
-const browser = await puppeteer.launch();
+const browser = await puppeteer.launch({ headless: false });
 const page = await browser.newPage();
 
-// Navigate the page to a URL.
-await page.goto('https://developer.chrome.com/');
+// 访问百度
+await page.goto('https://www.baidu.com/');
 
-// Set screen size.
-await page.setViewport({width: 1080, height: 1024});
+// 聚焦到搜索框并输入搜索内容
+await page.focus('#kw');
+await page.type('#kw', '免费小说网', { delay: 100 });
 
-// Type into search box.
-await page.locator('.devsite-search-field').fill('automate beyond recorder');
+// 点击搜索按钮
+await page.click('#su');
 
-// Wait and click on first result.
-await page.locator('.devsite-result-item-link').click();
+// 等待搜索结果加载
+await page.waitForSelector('#content_left');
 
-// Locate the full title with a unique string.
-const textSelector = await page
-  .locator('text/Customize and automate')
-  .waitHandle();
-const fullTitle = await textSelector?.evaluate(el => el.textContent);
+// 获取搜索结果页面的 HTML
+const html = await page.content();
 
-// Print the full title.
-console.log('The title of this blog post is "%s".', fullTitle);
+console.log(html);
 
+// 关闭浏览器
 await browser.close();
