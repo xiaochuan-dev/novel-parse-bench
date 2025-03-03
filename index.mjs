@@ -25,11 +25,11 @@ page.on('response', async (response) => {
     console.log('------------------');
 
 
-    // 发送修改后的响应
-    await page.evaluate((body) => {
-      console.log(body);
-      document.body.innerHTML = body;
-    }, responseBody);
+    // // 发送修改后的响应
+    // await page.evaluate((body) => {
+    //   console.log(body);
+    //   document.body.innerHTML = body;
+    // }, responseBody);
   }
 });
 
