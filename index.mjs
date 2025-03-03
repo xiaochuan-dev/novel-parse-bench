@@ -5,6 +5,8 @@ const browser = await puppeteer.launch({
 });
 const page = await browser.newPage();
 
+await page.goto('https://baidu.com');
+
 await page.setRequestInterception(true);
 page.on('request', (request) => {
   request.continue(); // 继续请求
