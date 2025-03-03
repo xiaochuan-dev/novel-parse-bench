@@ -19,7 +19,14 @@ await page.waitForSelector('#content_left');
 // 获取搜索结果页面的 HTML
 const html = await page.content();
 
-console.log(html);
+const firstResultSelector = '#content_left a'; // 第一个搜索结果的选择器
+await page.click(firstResultSelector);
+
+await page.waitForNavigation();
+
+const html2 = await page.content();
+
+console.log(html2);
 
 // 关闭浏览器
 await browser.close();
