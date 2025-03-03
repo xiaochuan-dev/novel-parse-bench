@@ -1,0 +1,17 @@
+{
+  "name": "@xiaochuan-dev/novel-parse-bench",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "packageManager": "yarn@1.22.22",
+  "dependencies": {
+    "puppeteer": "^24.3.0",
+    "x-novel-parse": "^0.0.10"
+  }
+}
