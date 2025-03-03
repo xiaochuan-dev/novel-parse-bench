@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-const browser = await puppeteer.launch({ headless: false });
+const browser = await puppeteer.launch();
 const page = await browser.newPage();
 
 await page.goto('https://cdhrss.chengdu.gov.cn/cdrsj/c151971/sydwzp.shtml');
