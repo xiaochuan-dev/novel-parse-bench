@@ -16,14 +16,12 @@ page.on('response', async (response) => {
   if (status === 412 || status === 413) {
     console.log(`拦截到 412 响应，URL: ${url}`);
 
-    const responseBody = await response.text();
-    console.log(responseBody);
+    await response._request._respond({
+      status: 200,
+      headers: response.headers(),
+      body: await response.buffer(),
+    });
 
-    await page.evaluate((body) => {
-      document.body.innerHTML = body;
-    }, responseBody);
-
-    console.log(`已将 412 替换为 200，URL: ${url}`);
   }
 });
 
