@@ -6,22 +6,20 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 
 await page.setRequestInterception(true);
-page.on('request', (request) => {
-  request.continue();
-});
-page.on('response', async (response) => {
-  const url = response.url();
-  const status = response.status();
+page.on('request', async (request) => {
+  const url = request.url();
 
-  if (status === 412 || status === 413) {
-    console.log(`拦截到 412 响应，URL: ${url}`);
+  if (url.includes('cdrsj/c151971/sydwzp.shtml')) {
+    const response = await fetch(url);
+    const body = await response.text();
 
-    await response._request._respond({
+    await request.respond({
       status: 200,
-      headers: response.headers(),
-      body: await response.buffer(),
+      headers: response.headers, 
+      body: body,
     });
-
+  } else {
+    request.continue();
   }
 });
 
