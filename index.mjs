@@ -9,7 +9,7 @@ await page.goto('https://cdhrss.chengdu.gov.cn/cdrsj/c151971/sydwzp.shtml');
 
 await page.waitForNavigation({ waitUntil: 'networkidle0' })
 
-// await page.waitForSelector('.header');
+await page.waitForSelector('.header');
 
 const html = await page.content();
 console.log(html);
